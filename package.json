@@ -6,9 +6,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rmdir /s /q dist && tsc -b && xcopy replays\\*.pmv dist\\replays\\",
-    "start": "node dist/index.js",
+    "start": "node dist/index.js replays\\basic.pmv",
     "restart": "npm run build && cross-env LOG_LEVEL=INFO npm run start",
-    "watch": "tsc-watch --onSuccess \"npm run start\"",
+    "watch": "tsc-watch --onSuccess \"node dist/index.js replays\\convoy.pmv\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",
