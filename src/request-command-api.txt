@@ -1,0 +1,110 @@
+pub enum RequestCommand {
+    #[message_request_command::id = 4017]
+    ActivateCheat { player: u32, cheat: u32, flag: u8, x: f32, y: f32, v1: u32, v2: u32 },
+    /*ArenaClearAllUnits = 4024,
+    ArenaStart = 4025,*/
+    #[message_request_command::id = 4028]
+    BarrierGateToggle { player: u32, barrier: u32 },
+    #[message_request_command::id = 4029]
+    BarrierSetBuildOrRepair { player: u32, barrier: u32, action: u8 },
+    #[message_request_command::id = 4012]
+    BuildHouse { card: u32, player: u32, building_id: u32, x: f32, y: f32, z: f32, angle: f32, tag: u32, played_count: u8 },
+    //CancelCutScene = 4023,
+    #[message_request_command::id = 4010]
+    CastSpellGod { card: u32, player: u32, card_position: u8, tag: u32, played_count: u8, target: internal::CGdTarget },
+    #[message_request_command::id = 4011]
+    CastSpellGodMulti { card: u32, player: u32, card_position: u8, tag: u32, played_count: u8, target: internal::CGdTarget },
+    #[message_request_command::id = 4014]
+    CastSpellEntity { player: u32, source: u32, spell: u32, target: internal::CGdTarget },
+    #[message_request_command::id = 4035]
+    ConstructionRepair { player: u32, construction: u32, cancel_repair: u32 },
+    #[message_request_command::id = 4003]
+    Desync { account: u32, reason: u16 },
+    #[message_request_command::id = 4015]
+    GroupAttack { player: u32, squads: Vec<u32>, target: internal::CGdTarget, force_attack: u8 },
+    #[message_request_command::id = 4033]
+    GroupEnterExitWall { player: u32, squads: Vec<u32>, barrier: u32, exit_wall: u32 },
+    //GroupFollow = 4016,
+    #[message_request_command::id = 4013]
+    GroupGoto { player: u32, squads: Vec<u32>, positions: Vec<(f32, f32)>, walk_mode: u8, run_or_orientation: u8, orientation: f32 },
+    #[message_request_command::id = 4020]
+    GroupHoldPosition { player: u32, squads: Vec<u32> },
+    #[message_request_command::id = 4041]
+    GroupKillEntity { player: u32, entities: Vec<u32> },
+    #[message_request_command::id = 4042]
+    SuperWeaponShadowSetBombBuilding { player: u32, building: u32, x: f32, y: f32 },
+    #[message_request_command::id = 4043]
+    GroupLootTarget { player: u32, squads: Vec<u32>, loot_target: u32 },
+    #[message_request_command::id = 4036]
+    GroupSacrifice { squads: Vec<u32>, target: u32, player: u32 },
+    #[message_request_command::id = 4019]
+    GroupStopJob { player: u32, squads: Vec<u32> },
+    //KillEntity = 4018,
+    #[message_request_command::id = 4034]
+    ModeChange { player: u32, target: u32, mode: u32 },
+    #[message_request_command::id = 4044]
+    Morph { player: u32, card: u32, deck_position: u8, tag: u32, played_count: u8, spell: u32, target: internal::CGdTarget },
+    //PlaceSquad = 4021,
+    #[message_request_command::id = 4005]
+    PlayerLoot { account: u32, loot_target: u32, map_loot_id: u32 },
+    #[message_request_command::id = 4006]
+    PlayerLootResult { account: u32, loot_target: u32, gold: Vec<(u32, u32)> },
+    #[message_request_command::id = 4001]
+    PlayerRemove { player: u32 },
+    #[message_request_command::id = 4002]
+    PlayerSurrender { player: u32 },
+    #[message_request_command::id = 4037]
+    PortalDefineExitPoint { player: u32, portal: u32, x: f32, y: f32 },
+    #[message_request_command::id = 4040]
+    PortalRemoveExitPoint { player: u32, portal: u32 },
+    #[message_request_command::id = 4039]
+    TunnelMakeExitPoint { player: u32, portal: u32 },
+    #[message_request_command::id = 4038]
+    GroupUsePortal { squads: Vec<u32>, portal: u32 },
+    #[message_request_command::id = 4030]
+    PowerSlotBuild { player: u32, slot: u32 },
+    #[message_request_command::id = 4009]
+    ProduceSquad { card: u32, player: u32, card_position: u8, tag: u32, played_count: u8, x: f32, y: f32, barrier_to_mount: u32 },
+    #[message_request_command::id = 4022]
+    ScriptCheat { player: u32, cheat_type: u8, flag: u8, x: f32, y: f32, v1: u32, v2: u32, sv1: String, sv2: String },
+    #[message_request_command::id = 4004]
+    ScriptVariable { checksum: u32, value: u8 },
+    #[message_request_command::id = 4007]
+    ScriptGoal { goal_sub_id: u32 },
+    /*ScriptGoalResult = 4008,
+    SetGameDifficulty = 4026,*/
+    #[message_request_command::id = 4032]
+    SquadRefill { player: u32, squad: u32, auto_refil: u32, cancel: u32 },
+    #[message_request_command::id = 4031]
+    TokenSlotBuild { player: u32, slot: u32, monument: u8 },
+    #[message_request_command::id = 4027]
+    UiInfo { player: u32, target: internal::CGdTarget, data1: u8, data2: u8 },
+    #[message_request_command::id = 666]
+    ServerReplayEndOld {  },
+    #[message_request_command::id = 4045]
+    SrAddition { data: SrAdditionData },
+}
+
+
+pub enum SrAdditionData {
+    // forward compatibility
+    #[message_request_sr_addition::id = 0]
+    Unknown {},
+    #[message_request_sr_addition::id = 1]
+    ServerReplayEnd {},
+    #[message_request_sr_addition::id = 2]
+    // Do not use anymore, replaced by `StateHashesWithDebugDetails`
+    StateHashes { state: StateInfo },
+    #[message_request_sr_addition::id = 3]
+    GamePaused { step: u32 },
+    #[message_request_sr_addition::id = 4]
+    Goal { goal: String, state: TaskState },
+    #[message_request_sr_addition::id = 5]
+    MatchModifier { source_account_id: u32, spell_id: u32 },
+    #[message_request_sr_addition::id = 6]
+    BotsStats { stats: Vec<BotStats> },
+    #[message_request_sr_addition::id = 7]
+    ProgressEvents { player: u32, events: Vec<(u8, u32)> },
+    #[message_request_sr_addition::id = 8]
+    StateHashesWithDebugDetails { state: StateInfo, details: Vec<internal::DebugDetail> },
+}
