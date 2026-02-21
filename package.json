@@ -9,6 +9,7 @@
     "start": "node dist/index.js replays\\basic.pmv",
     "restart": "npm run build && cross-env LOG_LEVEL=INFO npm run start",
     "watch": "tsc-watch --onSuccess \"node dist/index.js replays\\convoy.pmv\"",
+    "live": "tsc-watch --onSuccess \"node dist/index.js C:\\Users\\Krappa\\Documents\\BattleForge\\Diag\\movie.pmv\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",
